@@ -1,101 +1,74 @@
-import Image from "next/image";
+"use client"
+import AnimatedVideoCards from "@/components/AnimatedVideocards";
+import { BackgroundGradientAnimation } from "@/components/Background";
+import { FloatingNavDemo } from "@/components/Navbardemo";
+import { TimelineDemo } from "@/components/TimelineDemo";
+import { Component } from "@/components/Charts";
+import ClientVideoSection from "@/components/Testimonials";
+import { BackgroundGradientDemo } from "@/components/Calendly";
+import { FeaturesSectionDemo } from "@/components/Services";
+import Footer from "@/components/Footer";
+import { useRef } from "react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const connectSectionRef = useRef<HTMLDivElement>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const handleScrollToConnect = () => {
+    if (connectSectionRef.current) {
+      window.scrollTo({
+        top: connectSectionRef.current.offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  return (
+    <>
+      <FloatingNavDemo />
+      <section className="relative h-screen z-10 flex items-center justify-center bg-black text-white overflow-hidden">
+        <BackgroundGradientAnimation onButtonClick={handleScrollToConnect} />
+      </section>
+      <section id="works" className="relative py-6 sm:py-4 lg:py-16 xl:py-20 bg-dot-blue-700/[0.5] 2xl:py-24 -mb-32 scroll-smooth overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 z-50 scroll-smooth">
+          <AnimatedVideoCards />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+      <section className="scroll-container relative py-6 sm:py-4 bg-dot-blue-700/[0.5] lg:py-16 xl:py-20 2xl:py-24 -mb-32 scroll-smooth overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 z-50 bg-transparent scroll-smooth relative">
+          <TimelineDemo />
+        </div>
+      </section>
+      <section id="monthly-views-overview" className="relative py-16 sm:py-20 lg:py-24 bg-dot-blue-700/[0.5] scroll-smooth overflow-hidden mt-20">
+        <h1 className="text-6xl md:text-8xl font-bold text-center text-white mb-10">
+          Monthly Views Overview
+        </h1>
+        <div className="max-w-7xl mx-auto px-4 z-50 bg-transparent scroll-smooth relative">
+          <Component />
+        </div>
+      </section>
+      <section className="relative py-16 sm:py-20 lg:py-24 bg-dot-blue-700/[0.5] scroll-smooth overflow-hidden mt-20">
+        <div className="max-w-7xl mx-auto px-4 z-50 bg-transparent scroll-smooth relative">
+          <ClientVideoSection />
+        </div>
+      </section>
+      <section ref={connectSectionRef} id="connect-section" className="relative py-16 sm:py-20 lg:py-24 bg-dot-blue-700/[0.5] scroll-smooth overflow-hidden mt-20">
+      <h1 className="text-6xl md:text-8xl font-bold text-center text-white mb-16">
+        Let&apos;s Connect To Make The Change</h1>
+
+        <div className="max-w-7xl mx-auto px-4 z-50 bg-transparent scroll-smooth relative">
+          <BackgroundGradientDemo />
+        </div>
+      </section>
+      <section className="relative py-16 sm:py-20 lg:py-24 bg-dot-blue-700/[0.5] scroll-smooth overflow-hidden mt-20">
+        <div className="max-w-7xl mx-auto px-4 z-50 bg-transparent scroll-smooth relative">
+          <FeaturesSectionDemo />
+        </div>
+      </section>
+      <footer className="relative lg:py-24 -mb-96 scroll-smooth overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 z-50 bg-transparent scroll-smooth relative">
+          <Footer handleScrollToConnect={handleScrollToConnect} />
+        </div>
       </footer>
-    </div>
+    </>
   );
 }

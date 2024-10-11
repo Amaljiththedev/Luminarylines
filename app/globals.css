@@ -20,8 +20,24 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
 @layer utilities {
   .text-balance {
-    text-wrap: balance;
+    overflow-wrap: break-word; /* Alternative */
+    word-wrap: break-word; /* Fallback */
+    hyphens: auto; /* Allows hyphenation if needed */
   }
 }
+.scroll-container {
+  position: relative; /* or 'absolute' or 'fixed' */
+  /* other styles */
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
