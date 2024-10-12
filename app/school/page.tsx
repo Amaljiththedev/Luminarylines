@@ -1,7 +1,9 @@
 "use client"; // This line is necessary for client components in Next.js
 
 import Animatedcards2 from "@/components/Animatedcards2";
+import { BackgroundGradientDemo } from "@/components/BackgroundCard";
 import { CardHoverEffectDemo } from "@/components/CardsDemo";
+import { GlareCardDemo } from "@/components/GlareCardDemo";
 import { Component } from "@/components/Line";
 import { MarqueeDemoVertical } from "@/components/Marquee";
 import { MeteorsDemo } from "@/components/MetorsDemo";
@@ -88,19 +90,17 @@ export default function Home() {
   </div>
 </section>
 <section
-  id="school"
+  
   className="relative py-10 sm:py-8 lg:py-16 xl:py-20 2xl:py-24 scroll-smooth w-full"
 >
   <div className="flex flex-col max-w-7xl mx-auto px-4 items-center"> {/* Added items-center for centering */}
-    <h1 className="text-5xl md:text-8xl font-bold text-center text-white mb-10">
-      Hurry Up 
-    </h1>
-    <MeteorsDemo />
+
+    <BackgroundGradientDemo />
   </div>
 </section>
 <section
-  id="school"
-  className="relative py-10 sm:py-8 lg:py-16 xl:py-20 2xl:py-24 scroll-smooth w-full"
+
+  className="-mt-48 relative sm:py-8 lg:py-16 xl:py-20 2xl:py-24 scroll-smooth w-full"
 >
 
     <Footer />
