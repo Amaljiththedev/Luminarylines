@@ -111,8 +111,10 @@ const VideoCard: React.FC<{ item: VideoItem; index: number; unmutedIndex: number
           className="w-56 h-80 rounded-xl object-cover"
           src={item.videoUrl}
           autoPlay
+          playsInline // Ensures the video plays inline
           muted={unmutedIndex !== index} // Mute if this index is not the unmutedIndex
           loop
+         
         />
         <button
           onClick={toggleMute}

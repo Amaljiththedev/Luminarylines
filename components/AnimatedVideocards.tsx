@@ -35,12 +35,12 @@ const AnimatedVideoCards: React.FC = () => {
   };
 
   return (
-    <div className="relative py-24 flex flex-col items-center justify-center space-y-12">
-      <h2 className="text-5xl md:text-8xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 mb-16 md:mb-20">
+    <div className="relative py-16 sm:py-24 flex flex-col items-center justify-center space-y-8 sm:space-y-12">
+      <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 mb-8 sm:mb-16 lg:mb-20">
         Create Stories to Inspire
       </h2>
 
-      <div className="grid grid-cols-1 bg-black z-50 sm:grid-cols-2 md:grid-cols-4 gap-10 w-full max-w-7xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-10 w-full max-w-6xl">
         {videoItems.map((item) => (
           <VideoCard
             key={item.id}
@@ -64,7 +64,7 @@ const VideoCard: React.FC<{
   return (
     <div className="relative flex flex-col justify-center items-center">
       <motion.div
-        className="border-2 rounded-lg shadow-xl cursor-pointer overflow-hidden transition-transform duration-300 hover:scale-110"
+        className="border-2 shadow-xl cursor-pointer overflow-hidden transition-transform duration-300 hover:scale-110"
         initial={{ y: 0, rotate: -2 }}
         animate={{ y: [0, -4, 0], rotate: [2, -2, 4, -4] }}
         transition={{
@@ -76,16 +76,18 @@ const VideoCard: React.FC<{
       >
         <video
           ref={videoRef}
-          className="w-full h-72 sm:h-80 md:h-96 lg:h-[28rem] rounded-xl object-cover"
+          className="w-48 sm:w-64 h-72 sm:h-80 lg:h-[28rem] rounded-lg object-cover" // Adjusted width and height for less roundness
           src={item.videoUrl}
           autoPlay
           muted={isMuted}
+          playsInline // Prevents fullscreen on mobile
           loop
+          onTouchStart={(e) => e.preventDefault()} // Prevent accidental full-screen on mobile touch
         />
 
         <button
           onClick={onToggleMute}
-          className="absolute top-5 right-5 p-3 bg-gray-800 bg-opacity-50 text-white rounded-full focus:outline-none"
+          className="absolute top-3 right-3 sm:top-5 sm:right-5 p-2 sm:p-3 bg-gray-800 bg-opacity-50 text-white rounded-full focus:outline-none"
         >
           {isMuted ? <IconSpeakerphone size={24} /> : "Mute"}
         </button>
@@ -94,9 +96,9 @@ const VideoCard: React.FC<{
           <img
             src={item.avatarUrl}
             alt={item.name}
-            className="w-8 h-8 rounded-full object-cover border-2 border-white"
+            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border-2 border-white"
           />
-          <span className="text-white text-xs md:text-lg lg:text-base font-light">{item.name}</span>
+          <span className="text-white text-xs sm:text-sm md:text-lg font-light">{item.name}</span>
         </div>
       </motion.div>
     </div>

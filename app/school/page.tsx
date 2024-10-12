@@ -17,9 +17,7 @@ export default function Home() {
       <FloatingNavDemo />
 
       {/* Sparkles as full background */}
-      <div className="absolute inset-0 z-0">
-        <SparklesPreview />
-      </div>
+
 
       {/* Main content */}
       <main className="relative flex flex-col justify-center items-center mx-auto sm:px-10 py-10 min-h-screen z-10">
