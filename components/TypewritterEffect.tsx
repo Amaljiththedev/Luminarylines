@@ -1,6 +1,8 @@
 "use client";
 import { IconBrandWhatsapp } from "@tabler/icons-react";
 import { TypewriterEffectSmooth } from "./typewriter-effect";
+import Particles from "./Particles";
+import { RainbowButtonDemo } from "./Rainbow";
 
 export function TypewriterEffectSmoothDemo() {
   const words = [
@@ -12,13 +14,15 @@ export function TypewriterEffectSmoothDemo() {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center h-[50rem] -scroll-mt-96 space-y-6">
+    <>
+    
+    <div className="flex flex-col items-center justify-center h-[50rem] -mt-32 space-y-6">
       <p className="text-blue-200 dark:text-cyan-500 text-sm to-blue-600">
         From Zero to Hero In 3 Months
       </p>
       <TypewriterEffectSmooth words={words} />
 
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-20">
       <a
             href="https://wa.me/918089660028" 
             target="_blank"
@@ -27,11 +31,12 @@ export function TypewriterEffectSmoothDemo() {
           >
             <IconBrandWhatsapp size={24} className="text-black mr-2" /> Enquire Now
           </a>
-        
+    
       </div>
       <p className="justify-center font-medium text-white text-sm sm:text-base md:text-lg lg:text-lg mt-2 text-center " style={{ fontFamily: "Helvetica, sans-serif" }}>Drop the boring edits and bring your videos to life with something fresh and exciting!</p>
 
     </div>
+    </>
   );
 }
 

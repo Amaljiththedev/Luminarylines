@@ -10,6 +10,7 @@ import {
   IconBrandLinkedin,
   IconMail,
 } from "@tabler/icons-react";
+import { AnimatedPinDemo } from "./AnimatedPin";
 
 
 const Footer= () => {
@@ -21,6 +22,7 @@ const Footer= () => {
       <HeroHighlight>
         <h1 className="text-xl sm:text-xl md:text-xl lg:text-3xl font-sans font-bold text-white max-w-4xl lg:leading-snug text-center mx-auto mb-6" style={{ fontFamily: "Helvetica, sans-serif" }}>
           <span className="text-white">Break away from typical courses and join the masterclass.</span>
+          <AnimatedPinDemo/>
         </h1>
 
 
