@@ -59,13 +59,13 @@ export default function Home() {
           <BackgroundGradientDemo />
         </div>
       </section>
-      <section className="relative py-16 sm:py-20 lg:py-24 bg-black scroll-smooth overflow-hidden mt-20">
+      <section className="relative py-16 sm:py-20 lg:py-24 bg-black scroll-smooth overflow-hidden mt-20 -mb-70 z-50">
         <div className="max-w-7xl mx-auto px-4 z-50 bg-transparent scroll-smooth relative">
           <FeaturesSectionDemo />
         </div>
       </section>
       <footer className="relative lg:py-24 bg-black -mb-96 scroll-smooth overflow-hidden">
-        <div className="w-full mx-auto px-4 z-50 bg-transparent scroll-smooth relative">
+        <div className="w-full mx-auto px-4  bg-transparent scroll-smooth relative">
           <Footer handleScrollToConnect={handleScrollToConnect} />
         </div>
       </footer>
