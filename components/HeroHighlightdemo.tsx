@@ -55,7 +55,7 @@ export function HeroHighlightDemo({ onButtonClick }:{ onButtonClick?: () => void
         </div>
       </HeroHighlight>
       
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center -mt-10">
         <InfiniteMovingCardsDemo />
       </div>
     </div>

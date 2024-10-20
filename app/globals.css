@@ -3,15 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: black; /* Always black background */
+  --foreground: white; /* Always white text */
 }
 
 body {
@@ -20,7 +13,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
 @layer utilities {
   .text-balance {
     overflow-wrap: break-word; /* Alternative */
@@ -28,10 +20,12 @@ body {
     hyphens: auto; /* Allows hyphenation if needed */
   }
 }
+
 .scroll-container {
   position: relative; /* or 'absolute' or 'fixed' */
   /* other styles */
 }
+
 @keyframes shimmer {
   0% {
     background-position: -200%;
@@ -40,6 +34,7 @@ body {
     background-position: 200%;
   }
 }
+
 @layer base {
   :root {
     --color-1: 0 100% 63%;
@@ -56,12 +51,21 @@ body {
     --color-5: 90 100% 63%;
   }
 }
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-black text-white; /* Ensure body is black with white text */
   }
 }
 
+/* Ensure all elements use consistent black background and white text */
+.bg-background {
+  background-color: black;
+}
+
+.text-foreground {
+  color: white;
+}

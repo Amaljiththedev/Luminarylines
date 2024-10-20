@@ -81,7 +81,7 @@ export function Component() {
           })}
         </div>
       </CardHeader>
-      <CardContent className="px-2 sm:p-6 text-black">
+      <CardContent className="px-2 sm:p-6 text-white">
         <ChartContainer
           config={chartConfig}
           className="aspect-auto h-[250px] w-full"
@@ -101,8 +101,8 @@ export function Component() {
               tickMargin={8}
               minTickGap={32}
               tickFormatter={(value) => value}
-              stroke="black" // Ensure the X-axis is visible
-              tick={{ fill: "black", fontSize: "8px" }} // Corrected syntax for font size
+              stroke="white" // Ensure the X-axis is visible
+              tick={{ fill: "white", fontSize: "8px" }} // Corrected syntax for font size
             />
             <ChartTooltip
               content={

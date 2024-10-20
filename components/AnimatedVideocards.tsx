@@ -87,12 +87,12 @@ const VideoCard: React.FC<{
 
         <button
           onClick={onToggleMute}
-          className="absolute top-3 right-3 sm:top-5 sm:right-5 p-2 sm:p-3 bg-gray-800 bg-opacity-50 text-white rounded-full focus:outline-none"
+          className="absolute top-3 right-3 sm:top-5 sm:right-5 p-2 sm:p-3  text-white rounded-full focus:outline-none"
         >
           {isMuted ? <IconSpeakerphone size={24} /> : "Mute"}
         </button>
 
-        <div className="absolute bottom-5 left-1 flex items-center space-x-1 bg-black bg-opacity-60 rounded-lg">
+        <div className="absolute bottom-5 left-1 flex items-center space-x-1 bg-opacity-60 rounded-lg">
           <img
             src={item.avatarUrl}
             alt={item.name}

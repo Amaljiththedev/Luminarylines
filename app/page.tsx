@@ -25,20 +25,20 @@ export default function Home() {
   return (
     <>
       <FloatingNavDemo />
-      <section className="relative h-screen z-10 flex items-center justify-center bg-black text-white overflow-hidden">
+      <section className="relative h-full z-10 flex items-center justify-center bg-black text-white overflow-hidden">
         <BackgroundGradientAnimation onButtonClick={handleScrollToConnect} />
       </section>
-      <section id="works" className="relative py-6 sm:py-4 lg:py-16 xl:py-20 bg-black 2xl:py-24 -mb-32 scroll-smooth overflow-hidden">
+      <section id="works" className="relative py-6 sm:py-4 lg:py-16 xl:py-20 z-50 bg-black 2xl:py-24 -mb-32 scroll-smooth overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 z-50 scroll-smooth">
           <AnimatedVideoCards />
         </div>
       </section>
-      <section className="scroll-container relative py-6 sm:py-4 bg-dot-blue/[0.5] lg:py-16 xl:py-20 2xl:py-24 -mb-32 scroll-smooth overflow-hidden">
+      <section className="scroll-container relative py-6 sm:py-4 bg-dot-blue/[0.5] lg:py-16 bg-black text-white xl:py-20 2xl:py-24 -mb-32 scroll-smooth overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 z-50 bg-transparent scroll-smooth relative">
           <TimelineDemo />
         </div>
       </section>
-      <section id="monthly-views-overview" className="relative py-16 sm:py-20 lg:py-24 bg-dot-blue-700/[0.5] scroll-smooth overflow-hidden mt-20">
+      <section id="monthly-views-overview" className="relative py-16 sm:py-20 lg:py-24 bg-dot-blue-700/[0.5] bg-black scroll-smooth overflow-hidden mt-20">
         <h1 className="text-6xl md:text-8xl font-bold text-center text-white mb-10">
           Monthly Views Overview
         </h1>
