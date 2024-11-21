@@ -35,19 +35,14 @@ export function NumberTicker({
     }
   }, [motionValue, isInView, delay, value, direction]);
 
-  useEffect(
-    () =>
-      springValue.on("change", (latest) => {
-        if (ref.current) {
-          ref.current.textContent = Intl.NumberFormat("en-US", {
-            minimumFractionDigits: decimalPlaces,
-            maximumFractionDigits: decimalPlaces,
-          }).format(Number(latest.toFixed(decimalPlaces)));
-        }
-      }),
-    [springValue, decimalPlaces]
-  );
-
+  useEffect(() => {
+    if (isInView) {
+      setTimeout(() => {
+        motionValue.set(direction === "down" ? 0 : value);
+      }, delay * 1000);
+    }
+  }, [motionValue, isInView, delay, value, direction]);
+  
   return (
     <span
       className={cn(
