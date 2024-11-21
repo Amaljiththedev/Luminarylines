@@ -53,6 +53,7 @@ export default function Home() {
             className="relative scroll-smooth -mt-40 w-full mb-10" // Add consistent bottom margin
           >
             <div className="max-w-7xl mx-auto px-4">
+            <Particles className="absolute inset-0 pointer-events-none" />
               <Animatedcards2 />
             </div>
           </section>
@@ -64,6 +65,7 @@ export default function Home() {
         id="services"
         className="relative py-10 sm:py-8 lg:py-16 xl:py-20 2xl:py-24 scroll-smooth w-full"
       >
+        <Particles className="absolute inset-0 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4">
         <h1 className="text-6xl md:text-8xl font-bold text-center text-white mb-10">
           Why Choose Us?
@@ -75,6 +77,7 @@ export default function Home() {
         id="services"
         className="relative py-10 sm:py-8 lg:py-16 xl:py-20 2xl:py-24 scroll-smooth w-full -mb-48"
       >
+         <Particles className="absolute inset-0 pointer-events-none z-50" />
         <div className="max-w-7xl mx-auto px-4">
         <h1 className="text-6xl md:text-8xl font-bold text-center  text-white">
           What You Will Learn
@@ -86,6 +89,7 @@ export default function Home() {
         id="services"
         className="relative py-10 sm:py-8 lg:py-16 xl:py-20 2xl:py-24 scroll-smooth w-full"
       >
+         <Particles className="absolute inset-0 pointer-events-none z-50" />
         <div className="max-w-7xl mx-auto px-4">
 
         <VerticalTimelinePage/>
@@ -105,7 +109,7 @@ export default function Home() {
       <section
   
         className="relative py-10 sm:py-8 lg:py-16 -mt-44 xl:py-20 2xl:py-24 scroll-smooth w-full"
-      >
+      > <Particles className="absolute inset-0 pointer-events-none z-50" />
         <div className="max-w-7xl mx-auto px-4">
         <h1 className="text-6xl md:text-8xl font-bold text-center text-white mb-10">
           Skill Tf up!
@@ -115,7 +119,7 @@ export default function Home() {
       </section>
       <section
         className="relative py-10 sm:py-8 lg:py-16 xl:py-20 2xl:py-24 scroll-smooth w-full"
-      >
+      > <Particles className="absolute inset-0 pointer-events-none z-50" />
         <div className="max-w-7xl mx-auto px-4">
         <h1 className="text-6xl md:text-8xl font-bold text-center text-white mb-10">
           Stories
@@ -127,6 +131,7 @@ export default function Home() {
   className="relative py-10 sm:py-8 lg:py-16 xl:py-20 2xl:py-24 scroll-smooth w-full"
 >
   <div className="flex flex-col max-w-7xl mx-auto px-4 items-center"> {/* Added items-center for centering */}
+  <Particles className="absolute inset-0 pointer-events-none z-50" />
     <h1 className="text-6xl md:text-8xl font-bold text-center text-white mb-10">
       Meet The Instructor
     </h1>
@@ -138,6 +143,7 @@ export default function Home() {
   className="relative py-10 sm:py-8 lg:py-16 xl:py-20 2xl:py-24 mb-20 scroll-smooth w-full"
 >
   <div className="flex flex-col max-w-7xl mx-auto px-4 items-center"> {/* Added items-center for centering */}
+  <Particles className="absolute inset-0 pointer-events-none z-50" />
 
     <BackgroundGradientDemo />
   </div>

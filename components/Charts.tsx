@@ -31,8 +31,13 @@ const chartData = [
   { month: "August", views: 19765432 },
   { month: "September", views: 20000000 },
   { month: "October", views: 21123456 }, // This month may be adjusted
-  // { month: "October", views: 21123456 }, // This month may be adjusted
-  // { month: "October", views: 21123456 }, // This month may be adjusted
+  { month: "November", views: 21123456 }, // This month may be adjusted
+  { month: "December", views: 21123456 }, // This month may be adjusted
+  // { month: "January", views: 20123456 },
+  // { month: "February", views: 18987654 },
+  // { month: "March", views: 21567890 },
+  // { month: "April", views: 21000000 },
+  // { month: "May", views: 19345678 },
 ]
 const chartConfig = {
   Views: {
@@ -52,6 +57,7 @@ export function Component() {
   )
 
   return (
+    
     <Card>
       <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row text-white">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6 text-white">

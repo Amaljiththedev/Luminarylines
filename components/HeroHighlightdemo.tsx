@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { HeroHighlight, Highlight } from "./hero-highlight";
 import { useEffect, useState } from "react";
 import { InfiniteMovingCardsDemo } from "./MovingCard";
+import { NumberTicker } from "./number-ticker";
 
 
 export function HeroHighlightDemo({ onButtonClick }:{ onButtonClick?: () => void }) {
@@ -17,14 +18,23 @@ export function HeroHighlightDemo({ onButtonClick }:{ onButtonClick?: () => void
     <div className="h-[80vh] flex flex-col items-center justify-center bg-transparent px-4 md:px-8 lg:px-16 mt-44 lg:mt-44">
       {/* Button container */}
       <div className="bg-slate-800 no-underline group cursor-pointer relative shadow-2xl mt-16 sm:mt-20 lg:mt-36 mb-8 sm:mb-10 lg:mb-12 shadow-zinc-900 rounded-full p-px text-xs font-sans leading-6 text-white inline-block">
-        <span className="absolute inset-0 overflow-hidden rounded-full">
-          <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        </span>
-        <div className="relative flex space-x-2 items-center z-10 rounded-full bg-zinc-950 py-0.5 px-4 ring-1 ring-white/10">
-          <span>Luminary Lines</span>
-        </div>
-        <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-blue-400/0 via-blue-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40" />
-      </div>
+  <span className="absolute inset-0 overflow-hidden rounded-full">
+    <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+  </span>
+  <div className="relative flex space-x-2 items-center z-10 rounded-full bg-zinc-950 py-0.5 px-4 ring-1 ring-white/10">  
+    <span className="relative flex h-3 w-3 ml-2">
+      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white dark:bg-slate-900 opacity-75"></span>
+      <span className="relative inline-flex rounded-full h-3 w-3 bg-white dark:bg-slate-900"></span>
+    </span>
+    <span>
+      <NumberTicker value={244604911}/> views
+    </span>
+    {/* Ping Effect */}
+
+  </div>
+  <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-blue-400/0 via-blue-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40" />
+</div>
+
 
       {/* HeroHighlight container */}
       <HeroHighlight>

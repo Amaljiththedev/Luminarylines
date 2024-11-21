@@ -93,7 +93,9 @@ const VideoCard: React.FC<{ item: VideoItem; index: number; unmutedIndex: number
   };
 
   return (
+    
     <div className="flex-1 flex justify-center mt-6 md:mt-0">
+      
       <motion.div
         className="relative p-0 rounded-lg shadow-lg cursor-pointer h-96 flex flex-col justify-center items-center transition-transform duration-300 hover:shadow-xl"
         initial={{ y: 0, rotate: 0 }}
