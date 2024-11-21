@@ -31,18 +31,24 @@ export function NumberTicker({
     if (isInView) {
       setTimeout(() => {
         motionValue.set(direction === "down" ? 0 : value);
-      }, delay * 1000); // Fixed multiplier to delay in seconds
-    }
-  }, [motionValue, isInView, delay, value, direction]);
-
-  useEffect(() => {
-    if (isInView) {
-      setTimeout(() => {
-        motionValue.set(direction === "down" ? 0 : value);
       }, delay * 1000);
     }
   }, [motionValue, isInView, delay, value, direction]);
   
+
+  useEffect(
+    () =>
+      springValue.on("change", (latest) => {
+        if (ref.current) {
+          ref.current.textContent = Intl.NumberFormat("en-US", {
+            minimumFractionDigits: decimalPlaces,
+            maximumFractionDigits: decimalPlaces,
+          }).format(Number(latest.toFixed(decimalPlaces)));
+        }
+      }),
+    [springValue, decimalPlaces]
+  );
+
   return (
     <span
       className={cn(
