@@ -16,10 +16,7 @@ const TwoColumnFooter = () => {
       aria-labelledby="footer-heading"
       className="font-inter w-full bg-transparent"
     >
-      <h2 id="footer-heading" className="sr-only">
-        Footer
-      </h2>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row justify-between items-center space-y-8 lg:space-y-0 lg:items-start">
           {/* Logo and Description */}
           <div className="flex-shrink-0 text-center lg:text-left">
@@ -31,7 +28,18 @@ const TwoColumnFooter = () => {
               alt="logo"
               className="h-10 w-auto mx-auto lg:mx-0"
             />
-            <p className="text-sm text-gray-300 mt-2">Made with ❤️ by Ascension Wave.</p>
+            <p className="text-sm text-gray-300 mt-2">
+              Made with ❤️ by{' '}
+              <a
+                href="https://www.ascensionwave.in/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-white hover:text-gray-300 underline"
+              >
+                Ascension Wave
+              </a>
+              .
+            </p>
           </div>
 
           {/* Navigation Links */}
