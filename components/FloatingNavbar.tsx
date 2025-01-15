@@ -68,7 +68,7 @@ export const FloatingNav = ({
       
         {/* Replaced Tailwind Connect Button */}
         <Link
-          href="/school" // Link to the school page
+          href="https://www.luminarylines.school/" // Link to the school page
           className="bg-transparent no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px text-xs font-semibold leading-6 text-white inline-block"
         >
           <span className="absolute inset-0 overflow-hidden rounded-full">

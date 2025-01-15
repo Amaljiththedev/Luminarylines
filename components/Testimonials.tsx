@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { IconSpeakerphone } from '@tabler/icons-react';
 import { db } from '../app/firebaseConfig'; // Import your firebase configuration
 import { collection, getDocs } from 'firebase/firestore';
+import RevealOnScroll from './Revelonscroll';
 
 // Video item interface
 interface VideoItem {
@@ -34,13 +35,13 @@ const ClientVideoSection: React.FC = () => {
   return (
     <div className="flex flex-col space-y-16 w-full max-w-7xl p-4">
       {/* Main Heading */}
-      <h2 className="text-6xl md:text-8xl font-bold text-center bg-clip-text text-transparent text-white from-neutral-50 to-neutral-400 bg-opacity-50 md:mt-0">
+      <RevealOnScroll><h2 className="text-6xl md:text-8xl font-bold text-center bg-clip-text text-transparent text-white from-neutral-50 to-neutral-400 bg-opacity-50 md:mt-0">
         What Our Clients Say
-      </h2>
+      </h2></RevealOnScroll>
 
       {/* First Section: Testimonial on the left, Video on the right */}
-      <div className="flex flex-col md:flex-row items-center justify-between w-full space-y-8 md:space-y-0 md:space-x-8">
-        <TestimonialCard
+      <RevealOnScroll><div className="flex flex-col md:flex-row items-center justify-between w-full space-y-8 md:space-y-0 md:space-x-8">
+      <TestimonialCard
           name="Abhinav Mahajan"
           followers="3M Followers"
           text="Luminary lines significantly boosted my online presence, achieving impressive growth across all platforms. Highly recommend!"
@@ -55,24 +56,24 @@ const ClientVideoSection: React.FC = () => {
             setUnmutedIndex={setUnmutedIndex} 
           />
         )}
-      </div>
+      </div></RevealOnScroll>
 
       {/* Second Section: Video on the left, Testimonial on the right */}
       <div className="flex flex-col md:flex-row-reverse items-center justify-between w-full space-y-8 md:space-y-0 md:space-x-8">
-        <TestimonialCard
+      <RevealOnScroll><TestimonialCard
           name="Nipun Fitness"
           followers="400k Followers"
           text="Working with this team has transformed my content strategy and engagement. Highly recommend their services!"
           stats={["100 million+ views generated", "100+ videos edited"]}
           avatar="/nipun.png" // Updated unique avatar for Nipun Fitness
-        />
+        /></RevealOnScroll>
         {videoItems.length > 1 && (
-          <VideoCard 
+          <RevealOnScroll><VideoCard 
             item={videoItems[1]} 
             index={1} 
             unmutedIndex={unmutedIndex} 
             setUnmutedIndex={setUnmutedIndex} 
-          />
+          /></RevealOnScroll>
         )}
       </div>
     </div>

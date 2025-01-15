@@ -1,57 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+"use client";
+import React from "react";
 
-interface ParticleProps {
-  id: number
-  x: number
-  y: number
-  size: number
-}
-
-const ParticleSwarmLoader = () => {
-  const [particles, setParticles] = useState<ParticleProps[]>([])
-  const particleCount = 50
-
-  useEffect(() => {
-    setParticles(
-      Array.from({ length: particleCount }, (_, i) => ({
-        id: i,
-        x: Math.random() * 200 - 100,
-        y: Math.random() * 200 - 100,
-        size: Math.random() * 4 + 2,
-      })),
-    )
-  }, [])
-
+ 
+export function SparklesPreview() {
   return (
-    <div className="flex items-center justify-center h-screen w-full bg-black">
-      <div className="h-40 w-40 overflow-hidden rounded-full bg-transparent">
-        <svg width="100%" height="100%" viewBox="-100 -100 200 200">
-          {particles.map((particle) => (
-            <motion.circle
-              key={particle.id}
-              cx={particle.x}
-              cy={particle.y}
-              r={particle.size}
-              fill="#1E40AF"  
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: [0, 1, 0],
-                cx: [particle.x, 0, particle.x],
-                cy: [particle.y, 0, particle.y],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
-        </svg>
+    <div className="h-screen w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
+      <h1 className="md:text-7xl text-3xl lg:text-9xl font-bold text-center text-white relative z-20">
+        Luminary Lines
+      </h1>
+      <div className="w-[40rem] h-40 relative">
+        {/* Gradients */}
+        <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-sm" />
+        <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4" />
+        <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-sm" />
+        <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-1/4" />
+ 
       </div>
     </div>
-  )
+  );
 }
-
-export default ParticleSwarmLoader

@@ -45,11 +45,11 @@ export function HeroHighlightDemo({ onButtonClick }:{ onButtonClick?: () => void
           className="text-7xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-8xl font-sans font-bold text-white max-w-4xl lg:leading-snug text-center mx-auto mb-4 sm:mb-6"
           style={{ willChange: "opacity, transform", fontFamily: "Helvetica, sans-serif" }}
         >
-          <Highlight className="text-white">Ignite Vision</Highlight>
+          <h1 className="text-white font-medium">Ignite Vision</h1>
         </motion.h1>
 
         {/* Subtitle */}
-        <p className="justify-center font-thin text-white text-sm sm:text-base md:text-lg lg:text-lg mt-2 text-center " style={{ fontFamily: "Helvetica, sans-serif" }}>
+        <p className="justify-center font-normal text-white text-sm sm:text-base md:text-lg lg:text-lg mt-2 text-center " style={{ fontFamily: "Helvetica, sans-serif" }}>
           A personal branding agency focused on empowering innovators, creators, and brands to tell their unique stories.
         </p>
 
@@ -65,7 +65,7 @@ export function HeroHighlightDemo({ onButtonClick }:{ onButtonClick?: () => void
         </div>
       </HeroHighlight>
       
-      <div className="w-full flex justify-center -mt-10">
+      <div className="w-full flex justify-center -mt-10 z-20">
         <InfiniteMovingCardsDemo />
       </div>
     </div>

@@ -1,5 +1,7 @@
 import React from "react";
 import { Timeline } from "./timeline";
+import { motion } from "framer-motion"; // Import framer-motion for animations
+import { useInView } from "react-intersection-observer"; // Import react-intersection-observer
 
 export function TimelineDemo() {
   const data = [
@@ -12,6 +14,11 @@ export function TimelineDemo() {
           </p>
         </div>
       ),
+      titleAnimation: {
+        initial: { opacity: 0, y: 50 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.8, ease: "easeOut" },
+      },
     },
     {
       title: "Strategy Development",
@@ -22,6 +29,11 @@ export function TimelineDemo() {
           </p>
         </div>
       ),
+      titleAnimation: {
+        initial: { opacity: 0, y: 50 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.8, ease: "easeOut" },
+      },
     },
     {
       title: "Content Optimization",
@@ -32,6 +44,11 @@ export function TimelineDemo() {
           </p>
         </div>
       ),
+      titleAnimation: {
+        initial: { opacity: 0, y: 50 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.8, ease: "easeOut" },
+      },
     },
     {
       title: "Sales Funnel",
@@ -42,6 +59,11 @@ export function TimelineDemo() {
           </p>
         </div>
       ),
+      titleAnimation: {
+        initial: { opacity: 0, y: 50 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.8, ease: "easeOut" },
+      },
     },
     {
       title: "Growth Review",
@@ -52,12 +74,63 @@ export function TimelineDemo() {
           </p>
         </div>
       ),
+      titleAnimation: {
+        initial: { opacity: 0, y: 50 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.8, ease: "easeOut" },
+      },
     },
   ];
 
   return (
     <div className="w-full relative">
-      <Timeline data={data} />
+      <Timeline
+        data={data.map((item, index) => {
+          const { ref: titleRef, inView: titleInView } = useInView({
+            triggerOnce: true,
+            threshold: 0.3,
+          });
+
+          const { ref: contentRef, inView: contentInView } = useInView({
+            triggerOnce: true,
+            threshold: 0.3,
+          });
+
+          return {
+            ...item,
+            content: (
+              <div>
+                {/* Title Animation */}
+                <motion.div
+                  ref={titleRef}
+                  initial={item.titleAnimation.initial}
+                  animate={{
+                    opacity: titleInView ? 1 : 0,
+                    y: titleInView ? 0 : 50,
+                  }}
+                  transition={item.titleAnimation.transition}
+                  className="text-white text-xl md:text-2xl font-bold mb-4"
+                >
+                  {item.title}
+                </motion.div>
+
+                {/* Content Animation */}
+                <motion.div
+                  ref={contentRef}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{
+                    opacity: contentInView ? 1 : 0,
+                    y: contentInView ? 0 : 50,
+                  }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                >
+                  {item.content}
+                </motion.div>
+              </div>
+            ),
+          };
+        })}
+      />
     </div>
   );
 }

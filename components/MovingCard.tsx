@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { InfiniteMovingCards } from "./infinite-moving-cards";
 import { db } from "../app/firebaseConfig"; // Adjust the path as necessary
 import { collection, getDocs } from "firebase/firestore";
+import RevealOnScroll from "./Revelonscroll";
 
 interface Testimonial {
   name: string;
@@ -45,10 +46,11 @@ export function InfiniteMovingCardsDemo() {
 
   return (
     <div className="h-[25rem] rounded-md flex flex-col items-center justify-center relative overflow-hidden">
-      <p className="flex font-medium justify-center text-white  text-base mb-6 z-50">
-          Trusted by top creators, brands, and influencers</p>
+      <RevealOnScroll>
+        <p className="flex font-normal justify-center text-white  text-sm mb-6 z-50">
+          Trusted by top creators, brands, and influencers</p></RevealOnScroll>
 
-      <InfiniteMovingCards items={testimonials} direction="left" speed="slow" />
+          <RevealOnScroll><InfiniteMovingCards items={testimonials} direction="left" speed="slow" /></RevealOnScroll>
     </div>
   );
 }
