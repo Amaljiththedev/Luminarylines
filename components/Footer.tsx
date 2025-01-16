@@ -24,7 +24,7 @@ const TwoColumnFooter = () => {
               priority={true}
               width={100}
               height={40}
-              src="/logo.png"
+              src="/favicon.png"
               alt="logo"
               className="h-10 w-auto mx-auto lg:mx-0"
             />
