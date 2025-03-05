@@ -3,8 +3,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Luminary Lines|school",
-  description: "A personal branding agency focused on empowering innovators, creators, and brands to tell their unique stories.",
+  title: "Luminary Lines",
+  description: "Luminary Lines is a leading personal branding agency and school dedicated to empowering innovators, creators, and brands. Discover expert strategies and creative storytelling techniques to build a distinctive digital identity and elevate your brand's online presence.",
 };
 
 export default function Head() {
@@ -18,6 +18,14 @@ export default function Head() {
       <title>{title}</title> {/* Ensure title is a string */}
       <meta name="description" content={description} /> {/* Ensure description is a string */}
       <link rel="icon" href="/favicon.ico" />
+      <link
+        href="https://api.fontshare.com/v2/css?f[]=clash-display@1&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap"
+        rel="stylesheet"
+      />
     </>
   );
 }
