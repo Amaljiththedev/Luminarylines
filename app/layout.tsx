@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Analytics } from '@vercel/analytics/next';
 import "./globals.css";
 import { SparklesPreview } from "@/components/Loader";
-
+import Head from "./head";
 // Import Geist Mono font from Google Fonts
 
 
