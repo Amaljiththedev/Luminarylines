@@ -5,7 +5,7 @@ import { IconSpeakerphone } from "@tabler/icons-react";
 import { useInView } from "react-intersection-observer";
 import RevealOnScroll from "./Revelonscroll";
 
-
+// Define the video item interface
 interface VideoItem {
   id: string;
   title: string;
@@ -23,19 +23,19 @@ const AnimatedVideoCards: React.FC = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/agencyclientworks`
-        );
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/agencyclientworks`);
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
         const json = await response.json();
+        console.log("API Response:", json); // Debugging
+
         const data: VideoItem[] = json.data?.map((item: any) => ({
           id: item.id,
-          title: item.attributes?.Title || "Untitled",
-          subtitle: item.attributes?.Subtitle || "",
-          videoUrl: item.attributes?.videoUrl || "",
-          avatarUrl: item.attributes?.avatarUrl || "/default-avatar.png",
-          name: item.attributes?.Name || "Unknown",
+          title: item.title || "Untitled",
+          subtitle: item.subtitle || "",
+          videoUrl: item.videoUrl || "",
+          avatarUrl: item.avatarUrl || "/default-avatar.png",
+          name: item.name || "Unknown",
         })) || [];
 
         setVideoItems(data);
@@ -81,59 +81,36 @@ const AnimatedVideoCards: React.FC = () => {
 };
 
 // Video Card Component
-const VideoCard: React.FC<{
-  item: VideoItem;
-  isMuted: boolean;
-  onToggleMute: () => void;
-}> = ({ item, isMuted, onToggleMute }) => {
+const VideoCard: React.FC<{ item: VideoItem; isMuted: boolean; onToggleMute: () => void }> = ({ item, isMuted, onToggleMute }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Using Intersection Observer to track when the video is in view
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: false });
 
   return (
-    <div className="relative flex flex-col justify-center items-center" ref={ref}>
+    <motion.div
+      ref={ref}
+      className="relative flex flex-col justify-center items-center"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.9 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <motion.div
         className="relative border-4 border-gray-300 shadow-lg rounded-xl cursor-pointer overflow-hidden transition-transform duration-300 hover:scale-110"
-        initial={{ y: 0, rotate: -2, scale: 0.8 }}
-        animate={{
-          y: inView ? [0, -4, 0] : 0,
-          rotate: inView ? [2, -2, 4, -4] : 0,
-          scale: inView ? 1 : 0.8,
-          top: inView ? "0px" : "-10px",
-        }}
-        transition={{
-          duration: 1.5,
-          ease: "easeOut",
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
       >
-        <motion.div
-          className="absolute top-0 w-full h-4 bg-gradient-to-b from-transparent to-neutral-300 rounded-t-xl"
-          animate={{
-            height: inView ? ["0px", "4px", "0px"] : "0px",
-          }}
-          transition={{
-            duration: 0.5,
-            ease: "easeInOut",
-          }}
-        ></motion.div>
-
-        <video
-          ref={videoRef}
-          className="w-48 sm:w-64 h-72 sm:h-80 lg:h-[28rem] rounded-lg object-cover"
-          src={item.videoUrl}
-          autoPlay
-          muted={isMuted}
-          playsInline
-          loop
-          preload="metadata"
-          onTouchStart={(e) => e.preventDefault()}
-        />
+        {item.videoUrl ? (
+          <video
+            ref={videoRef}
+            className="w-48 sm:w-64 h-72 sm:h-80 lg:h-[28rem] rounded-lg object-cover"
+            src={item.videoUrl}
+            autoPlay
+            muted={isMuted}
+            playsInline
+            loop
+            preload="metadata"
+            onTouchStart={(e) => e.preventDefault()}
+          />
+        ) : (
+          <p className="text-gray-400 text-lg">No video available</p>
+        )}
 
         <button
           onClick={onToggleMute}
@@ -152,7 +129,7 @@ const VideoCard: React.FC<{
           <span className="text-white text-xs sm:text-sm md:text-lg font-light">{item.name}</span>
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

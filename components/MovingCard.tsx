@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { InfiniteMovingCards } from "./infinite-moving-cards";
 import RevealOnScroll from "./Revelonscroll";
 
-
 interface Testimonial {
   id: number | string;
   name: string;
@@ -17,18 +16,21 @@ export function InfiniteMovingCardsDemo() {
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/agencyclientcarousels`
-        );
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/agencyclientcarousels`);
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
         const json = await response.json();
-        const data: Testimonial[] = json.data?.map((item: any) => ({
-          id: item.id,
-          name: item.attributes?.Name || "Unknown",
-          avatar: item.attributes?.Avatar?.url || "/default-avatar.png",
-          profileUrl: item.attributes?.profileUrl || "#",
-        })) || [];
+        console.log("API Response:", json); // Debugging
+
+        const data: Testimonial[] =
+          json.data?.map((item: any) => ({
+            id: item.id,
+            name: item.Name || "Unknown",
+            avatar: item.Avatar
+              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${item.Avatar}`
+              : item.profileUrl, // Using profileUrl as fallback for Avatar
+            profileUrl: item.profileUrl || "#",
+          })) || [];
 
         setTestimonials(data);
       } catch (error) {
@@ -52,9 +54,13 @@ export function InfiniteMovingCardsDemo() {
           Trusted by top creators, brands, and influencers
         </p>
       </RevealOnScroll>
-      <RevealOnScroll>
-        <InfiniteMovingCards items={testimonials} direction="left" speed="slow" />
-      </RevealOnScroll>
+      {testimonials.length > 0 ? (
+        <RevealOnScroll>
+          <InfiniteMovingCards items={testimonials} direction="left" speed="slow" />
+        </RevealOnScroll>
+      ) : (
+        <p className="text-white text-center">No testimonials available.</p>
+      )}
     </div>
   );
 }

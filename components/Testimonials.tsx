@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { IconSpeakerphone } from "@tabler/icons-react";
 import RevealOnScroll from "./Revelonscroll";
 
-
 // Define an interface for the testimonial/video item.
 interface TestimonialVideoItem {
   id: string;
@@ -23,21 +22,24 @@ const ClientVideoSection: React.FC = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/clienttestimonials`
-        );
+        const response = await fetch("https://luminarylinesadmin.in/api/clienttestimonals");
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
         const json = await response.json();
-        const data: TestimonialVideoItem[] = json.data?.map((item: any) => ({
-          id: item.id,
-          name: item.attributes?.Name || "Unknown",
-          followers: item.attributes?.Followers || "0",
-          text: item.attributes?.Text || "No review provided.",
-          stats: item.attributes?.Stats?.split(",") || [],
-          avatar: item.attributes?.Avatar || "/default-avatar.png",
-          videoUrl: item.attributes?.videoUrl || "",
-        })) || [];
+        console.log("API Response:", json); // Debugging
+
+        const data: TestimonialVideoItem[] =
+          json.data?.map((item: any) => ({
+            id: item.id,
+            name: item.Name || "Unknown",
+            followers: item.Followers || "0",
+            text: item.Text || "No review provided.",
+            stats: item.Stats ? item.Stats.split(",") : [],
+            avatar: item.Avatar?.startsWith("http")
+              ? item.Avatar
+              : `https://luminarylinesadmin.in/uploads/${item.Avatar}`,
+            videoUrl: item.videoUrl || "",
+          })) || [];
 
         setItems(data);
       } catch (error) {
@@ -57,21 +59,19 @@ const ClientVideoSection: React.FC = () => {
         </h2>
       </RevealOnScroll>
 
-      {/* First Section: Testimonial on the left, Video on the right */}
-      <RevealOnScroll>
-        <div className="flex flex-col md:flex-row items-center justify-between w-full space-y-8 md:space-y-0 md:space-x-8">
-          {items.length > 0 && <TestimonialCard {...items[0]} />}
-          {items.length > 0 && <VideoCard item={items[0]} index={0} unmutedIndex={unmutedIndex} setUnmutedIndex={setUnmutedIndex} />}
-        </div>
-      </RevealOnScroll>
-
-      {/* Second Section: Video on the left, Testimonial on the right */}
-      <RevealOnScroll>
-        <div className="flex flex-col md:flex-row-reverse items-center justify-between w-full space-y-8 md:space-y-0 md:space-x-8">
-          {items.length > 1 && <TestimonialCard {...items[1]} />}
-          {items.length > 1 && <VideoCard item={items[1]} index={1} unmutedIndex={unmutedIndex} setUnmutedIndex={setUnmutedIndex} />}
-        </div>
-      </RevealOnScroll>
+      {/* Testimonials & Videos */}
+      {items.length > 0 ? (
+        items.map((item, index) => (
+          <RevealOnScroll key={item.id}>
+            <div className={`flex flex-col md:flex-${index % 2 === 0 ? "row" : "row-reverse"} items-center justify-between w-full space-y-8 md:space-y-0 md:space-x-8`}>
+              <TestimonialCard {...item} />
+              <VideoCard item={item} index={index} unmutedIndex={unmutedIndex} setUnmutedIndex={setUnmutedIndex} />
+            </div>
+          </RevealOnScroll>
+        ))
+      ) : (
+        <p className="text-center text-gray-400 text-xl">No testimonials available.</p>
+      )}
     </div>
   );
 };
@@ -83,6 +83,7 @@ interface VideoCardProps {
   unmutedIndex: number | null;
   setUnmutedIndex: React.Dispatch<React.SetStateAction<number | null>>;
 }
+
 const VideoCard: React.FC<VideoCardProps> = ({ item, index, unmutedIndex, setUnmutedIndex }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -98,16 +99,20 @@ const VideoCard: React.FC<VideoCardProps> = ({ item, index, unmutedIndex, setUnm
         whileHover={{ y: -10, rotate: 5 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
-        <video
-          ref={videoRef}
-          className="w-56 h-80 rounded-xl object-cover"
-          src={item.videoUrl}
-          autoPlay
-          playsInline
-          muted={unmutedIndex !== index}
-          loop
-          preload="metadata"
-        />
+        {item.videoUrl ? (
+          <video
+            ref={videoRef}
+            className="w-56 h-80 rounded-xl object-cover"
+            src={item.videoUrl}
+            autoPlay
+            playsInline
+            muted={unmutedIndex !== index}
+            loop
+            preload="metadata"
+          />
+        ) : (
+          <p className="text-gray-400 text-lg">No video available</p>
+        )}
         <button
           onClick={toggleMute}
           className="absolute top-4 right-4 p-2 text-white rounded focus:outline-none hover:bg-gray-700"
