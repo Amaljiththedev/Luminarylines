@@ -1,13 +1,13 @@
 import { cn } from "@/lib/utils";
 import {
-  IconBrandPagekit,
-  IconBrandRedux,
-  IconCurrencyDollar,
-  IconTarget,
-  IconClock,
-  IconBookFilled,
+  IconBrandTiktok,
+  IconSchool,
+  IconMovie,
+  IconBook2,
+  IconUserHeart,
+  IconCash,
+  IconClockHeart,
   IconCoin,
-  IconVideo,
 } from "@tabler/icons-react";
 
 export function FeaturesSectionDemo() {
@@ -15,62 +15,70 @@ export function FeaturesSectionDemo() {
     {
       title: "Premium Short-Form Content",
       description:
-        "High-quality short videos for platforms like Shorts, Reels, and TikTok, driving engagement and growth.",
-      icon: <IconBrandPagekit />,
+        "High-quality short videos optimized for Shorts, Reels, and TikTok to maximize engagement and drive exponential growth.",
+      icon: <IconBrandTiktok className="w-6 h-6" />,
     },
     {
       title: "Educational & Entertaining Content",
       description:
-        "Blend informative and entertaining content to engage your audience and position your brand as an authority.",
-      icon: <IconBrandRedux />,
+        "Master the blend of education and entertainment to captivate audiences and establish thought leadership.",
+      icon: <IconSchool className="w-6 h-6" />,
     },
     {
       title: "Long-Form Content Development",
       description:
-        "Create compelling long-form content like YouTube videos or podcasts to deepen audience connections.",
-      icon: <IconVideo />,
+        "Produce compelling documentaries, YouTube series, and podcasts that create lasting audience connections.",
+      icon: <IconMovie className="w-6 h-6" />,
     },
     {
       title: "Courses & Digital Products",
       description:
-        "Offer expertly crafted courses and digital products to provide value and expand your influence.",
-      icon: <IconBookFilled />,
+        "Monetize your expertise with beautifully designed courses, e-books, and premium digital resources.",
+      icon: <IconBook2 className="w-6 h-6" />,
     },
     {
       title: "Personal Brand Strategy",
       description:
-        "Develop a strategy that aligns your content, messaging, and visuals for maximum impact.",
-      icon: <IconTarget />,
+        "360° brand development encompassing visual identity, content strategy, and audience positioning.",
+      icon: <IconUserHeart className="w-6 h-6" />,
     },
     {
       title: "Revenue-Driven Content",
       description:
-        "Create content tailored to drive sales, turning your followers into paying customers.",
-      icon: <IconCurrencyDollar />,
+        "Conversion-optimized content strategies that transform followers into loyal customers.",
+      icon: <IconCash className="w-6 h-6" />,
     },
     {
-      title: "Time-Saving Automation",
+      title: "Smart Automation",
       description:
-        "Use automation tools to save time and focus on scaling your business and profits.",
-      icon: <IconClock />,
+        "Implement cutting-edge automation to streamline workflows and maximize productivity.",
+      icon: <IconClockHeart className="w-6 h-6" />,
     },
     {
-      title: "Content Monetization Strategy",
+      title: "Monetization Systems",
       description:
-        "Implement strategies to monetize your content, turning engagement into sustainable revenue.",
-      icon: <IconCoin />,
+        "Build sustainable revenue streams through strategic content partnerships and premium offerings.",
+      icon: <IconCoin className="w-6 h-6" />,
     },
   ];
 
   return (
-    <section className="relative z-10 py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 mb-12">
-        What We Do
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {features.map((feature, index) => (
-          <Feature key={feature.title} {...feature} index={index} />
-        ))}
+    <section className="relative py-20 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r text-white  mb-4">
+            Our Expertise
+          </h2>
+          <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
+            Transforming digital presence through strategic content creation and brand development
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {features.map((feature, index) => (
+            <Feature key={feature.title} {...feature} index={index} />
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -90,21 +98,27 @@ const Feature = ({
   return (
     <div
       className={cn(
-        "flex flex-col items-start justify-start w-[300px] mx-auto py-6 px-6 border border-neutral-800 dark:border-neutral-700 rounded-lg group shadow-md hover:shadow-lg transition-shadow duration-300"
+        "group relative bg-gradient-to-b from-neutral-900 to-neutral-950 p-6 rounded-2xl border border-neutral-800",
+        "transform transition-all duration-300 ease-out",
+        "hover:border-cyan-400/30 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/10",
+        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-cyan-500/10 before:to-blue-500/10 before:opacity-0 before:transition-opacity before:duration-300 before:group-hover:opacity-100"
       )}
     >
-      <div className="mb-3 text-neutral-300 dark:text-neutral-400 text-3xl">
-        {icon}
+      <div className="relative z-10">
+        <div className="mb-4 flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-lg">
+          {icon}
+        </div>
+        
+        <h3 className="text-xl font-semibold text-neutral-100 mb-3">
+          <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_2px]">
+            {title}
+          </span>
+        </h3>
+        
+        <p className="text-neutral-400 leading-relaxed text-sm md:text-base">
+          {description}
+        </p>
       </div>
-      <h3 className="text-base md:text-lg font-semibold text-neutral-100 dark:text-neutral-200 mb-2 relative z-10">
-        <div className="absolute left-0 inset-y-0 h-5 group-hover:h-7 w-1 rounded-tr-full rounded-br-full bg-neutral-600 dark:bg-neutral-800 group-hover:bg-cyan-500 transition-all duration-200 origin-center" />
-        <span className="group-hover:translate-x-2 transition duration-200 inline-block">
-          {title}
-        </span>
-      </h3>
-      <p className="text-xs md:text-sm text-neutral-400 dark:text-neutral-300 leading-relaxed max-w-[260px]">
-        {description}
-      </p>
     </div>
   );
 };

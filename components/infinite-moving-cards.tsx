@@ -11,6 +11,7 @@ export const InfiniteMovingCards = ({
   className,
 }: {
   items: {
+    id: number | string;
     name: string;
     avatar: string; // Image URL
     profileUrl: string; // Profile link
@@ -22,12 +23,11 @@ export const InfiniteMovingCards = ({
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
+  const [start, setStart] = useState(false);
 
   useEffect(() => {
     addAnimation();
   }, []);
-
-  const [start, setStart] = useState(false);
 
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
@@ -35,9 +35,7 @@ export const InfiniteMovingCards = ({
 
       scrollerContent.forEach((item) => {
         const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
+        scrollerRef.current?.appendChild(duplicatedItem);
       });
 
       getDirection();
@@ -63,13 +61,13 @@ export const InfiniteMovingCards = ({
           duration = "15s";
           break;
         case "normal":
-          duration = "20s"; // Adjusted for a better experience
+          duration = "20s";
           break;
         case "slow":
           duration = "25s";
           break;
         default:
-          duration = "20s"; // Default to normal
+          duration = "20s";
       }
       containerRef.current.style.setProperty("--animation-duration", duration);
     }
@@ -93,21 +91,20 @@ export const InfiniteMovingCards = ({
       >
         {items.map((item) => (
           <li
-            className="w-[200px] h-full max-w-full relative rounded-lg  flex-shrink-0  px-4 py-4 md:w-[250px]"
-            key={item.name}
+            className="w-[200px] h-full max-w-full relative rounded-lg flex-shrink-0 px-4 py-4 md:w-[250px]"
+            key={item.id}
           >
             <a
-              href={item.profileUrl} // Profile link
+              href={item.profileUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex flex-row items-center"
             >
               <img
-                srcSet={item.avatar} // Responsive image sources
-                sizes="(max-width: 40px) 40px, (max-width: 80px) 80px" // Image size for different screens
+                src={item.avatar}
                 alt={`Avatar of ${item.name}`}
                 className="w-10 h-10 rounded-full mr-3"
-                loading="lazy" // Lazy loading for images
+                loading="lazy"
               />
               <span className="relative z-20 text-base leading-[1.5] text-white font-normal truncate">
                 {item.name}

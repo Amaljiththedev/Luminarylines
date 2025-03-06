@@ -1,5 +1,5 @@
 // app/head.tsx
-
+// jij
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
