@@ -80,21 +80,88 @@ const AnimatedVideoCards: React.FC = () => {
   );
 };
 
-// Video Card Component
+// Video Card Component with more subtle animations
 const VideoCard: React.FC<{ item: VideoItem; isMuted: boolean; onToggleMute: () => void }> = ({ item, isMuted, onToggleMute }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: false });
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Animation variants for the card container
+  const containerVariants = {
+    initial: { opacity: 0, scale: 0.9 },
+    animate: { opacity: inView ? 1 : 0, scale: inView ? 1 : 0.9 },
+    hover: { 
+      scale: 1.05,
+      transition: { 
+        duration: 0.3,
+        ease: "easeOut" 
+      }
+    }
+  };
+
+  // Animation variants for the bounce and wiggle effect (reduced)
+  const cardVariants = {
+    initial: { 
+      y: 0, 
+      rotate: 0 
+    },
+    bounce: { 
+      y: [0, -8, 0], // Reduced bounce height from -15 to -8
+      transition: {
+        y: {
+          repeat: Infinity,
+          duration: 2, // Slowed down from 1.5 to 2
+          ease: "easeInOut",
+          repeatType: "reverse"
+        }
+      }
+    },
+    wiggle: {
+      rotate: [0, -1, 1, -1, 0], // Reduced rotation angles from [-2,2] to [-1,1]
+      transition: {
+        rotate: {
+          repeat: Infinity,
+          duration: 2.5, // Slowed down from 2 to 2.5
+          ease: "easeInOut",
+          repeatType: "loop",
+          times: [0, 0.2, 0.5, 0.8, 1]
+        }
+      }
+    },
+    hoverWiggle: {
+      rotate: [-0.5, 0.5, -0.5, 0.5, 0], // Reduced hover wiggle
+      scale: 1.08, // Reduced scale from 1.1 to 1.08
+      transition: {
+        rotate: {
+          duration: 0.5,
+          ease: "easeInOut",
+        },
+        scale: {
+          duration: 0.3,
+          ease: "easeOut"
+        }
+      }
+    }
+  };
 
   return (
     <motion.div
       ref={ref}
       className="relative flex flex-col justify-center items-center"
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.9 }}
+      initial="initial"
+      animate="animate"
+      variants={containerVariants}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <motion.div
-        className="relative border-4 border-gray-300 shadow-lg rounded-xl cursor-pointer overflow-hidden transition-transform duration-300 hover:scale-110"
+        className="relative border-4 border-gray-300 shadow-lg rounded-xl cursor-pointer overflow-hidden"
+        variants={cardVariants}
+        initial="initial"
+        animate={isHovered ? "hoverWiggle" : inView ? ["bounce", "wiggle"] : "initial"}
+        whileHover="hoverWiggle"
+        onHoverStart={() => setIsHovered(true)}
+        onHoverEnd={() => setIsHovered(false)}
+        onTap={() => setIsHovered(true)}
       >
         {item.videoUrl ? (
           <video
@@ -112,14 +179,16 @@ const VideoCard: React.FC<{ item: VideoItem; isMuted: boolean; onToggleMute: () 
           <p className="text-gray-400 text-lg">No video available</p>
         )}
 
-        <button
+        <motion.button
           onClick={onToggleMute}
           className="absolute top-3 right-3 sm:top-5 sm:right-5 p-2 sm:p-3 text-white rounded-full focus:outline-none"
+          whileHover={{ scale: 1.2, backgroundColor: "rgba(0,0,0,0.5)", transition: { duration: 0.2 } }}
+          whileTap={{ scale: 0.9 }}
         >
           {isMuted ? <IconSpeakerphone size={24} /> : "Mute"}
-        </button>
+        </motion.button>
 
-        <div className="absolute bottom-5 left-1 flex items-center space-x-1 bg-opacity-60 rounded-lg">
+        <div className="absolute bottom-5 left-1 flex items-center space-x-1 bg-opacity-60 rounded-lg px-2 py-1 backdrop-blur-sm">
           <img
             src={item.avatarUrl}
             alt={item.name}
