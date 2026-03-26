@@ -21,32 +21,43 @@ const AnimatedVideoCards: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/agencyclientworks`);
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    const localVideos: VideoItem[] = [
+      {
+        id: "1",
+        title: "Creative Studio Reel",
+        subtitle: "Impactful storytelling",
+        videoUrl: "https://vlzqrxxsielfcuq7.public.blob.vercel-storage.com/AQMcnqzRO1YO6fMbZl1iJGZ2s6f2gsaoOSUATmruDQrnuCHf1ayK9SpcfSSbo-ogQWZDcSsxZQJPTuh-aVzNaI43rp3ipBpoVRWxgx4.mp4",
+        avatarUrl: "/group1.png",
+        name: "Luminary Team",
+      },
+      {
+        id: "2",
+        title: "UI Motion Design",
+        subtitle: "Bold visuals",
+        videoUrl: "https://vlzqrxxsielfcuq7.public.blob.vercel-storage.com/AQMgl81LzpXtmUixUnp1-3IYe2esYM8znPh_l6fDBagJ0ZHKafqo165SA-YAPIqP1DT-n3u5brIiW7IWDv-sxDIT.mp4",
+        avatarUrl: "/group1.png",
+        name: "Creative Lead",
+      },
+      {
+        id: "3",
+        title: "Product Launch Teaser",
+        subtitle: "Future-ready experience",
+        videoUrl: "https://vlzqrxxsielfcuq7.public.blob.vercel-storage.com/AQOvOZNF2l7UeEeyPbZbsMLpoZATT1VQqMGtBvWEJCKiMpQnbutIOUhhg0cSVd1BF5swEoSsM_oLNr9SRcZPnDAfqVmQ4S7fusNbXUw.mp4",
+        avatarUrl: "/group1.png",
+        name: "Development Studio",
+      },
+      {
+        id: "4",
+        title: "Brand Identity Showcase",
+        subtitle: "Elegant and punchy",
+        videoUrl: "https://vlzqrxxsielfcuq7.public.blob.vercel-storage.com/AQPPCrsihlLN77pDvSCa5xomnM_jFmKgnW8qBibBdCQkVnnkNxz2WJO_GWyzTSCOHO44ezGp2z9zEUR4G9IAuA9I.mp4",
+        avatarUrl: "/group1.png",
+        name: "Visual Team",
+      },
+    ];
 
-        const json = await response.json();
-        console.log("API Response:", json); // Debugging
-
-        const data: VideoItem[] = json.data?.map((item: any) => ({
-          id: item.id,
-          title: item.title || "Untitled",
-          subtitle: item.subtitle || "",
-          videoUrl: item.videoUrl || "",
-          avatarUrl: item.avatarUrl || "/default-avatar.png",
-          name: item.name || "Unknown",
-        })) || [];
-
-        setVideoItems(data);
-      } catch (error) {
-        console.error("Error fetching videos:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchVideos();
+    setVideoItems(localVideos);
+    setLoading(false);
   }, []);
 
   const handleToggleMute = (id: string) => {

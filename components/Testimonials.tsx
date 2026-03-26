@@ -42,16 +42,6 @@ const ClientVideoSection: React.FC = () => {
         videoUrl: "https://vlzqrxxsielfcuq7.public.blob.vercel-storage.com/AQMgl81LzpXtmUixUnp1-3IYe2esYM8znPh_l6fDBagJ0ZHKafqo165SA-YAPIqP1DT-n3u5brIiW7IWDv-sxDIT.mp4",
         profileUrl: "https://www.instagram.com/nipunfitness/",
       },
-      {
-        id: "static-3",
-        name: "Ashvin Shibu",
-        followers: "100K followers",
-        text: "Ashvin has been a strong collaborator, bringing precise creative direction and clarity to a highly successful campaign launch.",
-        stats: ["Creative Strategy", "Brand Partnership", "Content Impact"],
-        avatar: "/ima.png",
-        videoUrl: "",
-        profileUrl: "https://www.instagram.com/ashvin.shibu/",
-      },
 
     ];
 
