@@ -14,33 +14,35 @@ export function InfiniteMovingCardsDemo() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchTestimonials = async () => {
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/agencyclientcarousels`);
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    const staticTestimonials: Testimonial[] = [
+      {
+        id: "static-1",
+        name: "Abhinav Mahajan",
+        avatar: "/abij.png",
+        profileUrl: "https://www.instagram.com/abhinavmahajanlife/",
+      },
+      {
+        id: "static-2",
+        name: "Nipun Fitness",
+        avatar: "/nipun.png",
+        profileUrl: "https://www.instagram.com/nipunfitness/",
+      },
+      {
+        id: "static-3",
+        name: "Ashvin Shibu",
+        avatar: "/ima.png",
+        profileUrl: "https://www.instagram.com/ashvin.shibu/",
+      },
+      {
+        id: "static-4",
+        name: "Tried But Failed",
+        avatar: "/image.png",
+        profileUrl: "https://www.instagram.com/_triedbutfailed/",
+      },
+    ];
 
-        const json = await response.json();
-        console.log("API Response:", json); // Debugging
-
-        const data: Testimonial[] =
-          json.data?.map((item: any) => ({
-            id: item.id,
-            name: item.Name || "Unknown",
-            avatar: item.Avatar
-              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${item.Avatar}`
-              : item.profileUrl, // Using profileUrl as fallback for Avatar
-            profileUrl: item.profileUrl || "#",
-          })) || [];
-
-        setTestimonials(data);
-      } catch (error) {
-        console.error("Error fetching testimonials:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTestimonials();
+    setTestimonials(staticTestimonials);
+    setLoading(false);
   }, []);
 
   if (loading) {

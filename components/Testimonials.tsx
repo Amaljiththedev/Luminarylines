@@ -13,6 +13,7 @@ interface TestimonialVideoItem {
   stats: string[];
   avatar: string;
   videoUrl: string;
+  profileUrl: string;
 }
 
 const ClientVideoSection: React.FC = () => {
@@ -20,34 +21,50 @@ const ClientVideoSection: React.FC = () => {
   const [unmutedIndex, setUnmutedIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const response = await fetch("https://luminarylinesadmin.in/api/clienttestimonals");
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-        const json = await response.json();
-        console.log("API Response:", json); // Debugging
-
-        const data: TestimonialVideoItem[] =
-          json.data?.map((item: any) => ({
-            id: item.id,
-            name: item.Name || "Unknown",
-            followers: item.Followers || "0",
-            text: item.Text || "No review provided.",
-            stats: item.Stats ? item.Stats.split(",") : [],
-            avatar: item.Avatar?.startsWith("http")
-              ? item.Avatar
-              : `https://luminarylinesadmin.in/uploads/${item.Avatar}`,
-            videoUrl: item.videoUrl || "",
-          })) || [];
-
-        setItems(data);
-      } catch (error) {
-        console.error("Error fetching client testimonials:", error);
+    const staticItems: TestimonialVideoItem[] = [
+      {
+        id: "static-1",
+        name: "Abhinav Mahajan",
+        followers: "2M followers",
+        text: "We partnered with this video creation agency to scale our creative output, and the results were phenomenal: higher engagement, stronger audience retention, and measurable conversion lift in just weeks.",
+        stats: ["Video Creation", "Brand Growth", "High Engagement", "ROI-focused"],
+        avatar: "/abij.png",
+        videoUrl: "/AQMcnqzRO1YO6fMbZl1iJGZ2s6f2gsaoOSUATmruDQrnuCHf1ayK9SpcfSSbo-ogQWZDcSsxZQJPTuh-aVzNaI43rp3ipBpoVRWxgx4.mp4",
+        profileUrl: "https://www.instagram.com/abhinavmahajanlife/",
+      },
+      {
+        id: "static-2",
+        name: "Nipun Fitness",
+        followers: "300K+ followers",
+        text: "Their storytelling approach for fitness campaigns is next-level: authentic, high-energy clips that drove more demo signups and community interaction than any previous content.",
+        stats: ["Fitness Content", "Community Growth", "Healthy Lifestyle", "Conversion Focused"],
+        avatar: "/nipun.png",
+        videoUrl: "/AQMgl81LzpXtmUixUnp1-3IYe2esYM8znPh_l6fDBagJ0ZHKafqo165SA-YAPIqP1DT-n3u5brIiW7IWDv-sxDIT.mp4",
+        profileUrl: "https://www.instagram.com/nipunfitness/",
+      },
+      {
+        id: "static-3",
+        name: "Ashvin Shibu",
+        followers: "100K followers",
+        text: "Ashvin has been a strong collaborator, bringing precise creative direction and clarity to a highly successful campaign launch.",
+        stats: ["Creative Strategy", "Brand Partnership", "Content Impact"],
+        avatar: "/ima.png",
+        videoUrl: "",
+        profileUrl: "https://www.instagram.com/ashvin.shibu/",
+      },
+      {
+        id: "static-4",
+        name: "Tried But Failed",
+        followers: "50K followers",
+        text: "Their bold storytelling and unique personality made our campaign stand out in a crowded feed.",
+        stats: ["Bold Voice", "Audience Growth", "Storytelling"],
+        avatar: "/image.png",
+        videoUrl: "",
+        profileUrl: "https://www.instagram.com/_triedbutfailed/",
       }
-    };
+    ];
 
-    fetchItems();
+    setItems(staticItems);
   }, []);
 
   return (
@@ -63,9 +80,15 @@ const ClientVideoSection: React.FC = () => {
       {items.length > 0 ? (
         items.map((item, index) => (
           <RevealOnScroll key={item.id}>
-            <div className={`flex flex-col md:flex-${index % 2 === 0 ? "row" : "row-reverse"} items-center justify-between w-full space-y-8 md:space-y-0 md:space-x-8`}>
-              <TestimonialCard {...item} />
-              <VideoCard item={item} index={index} unmutedIndex={unmutedIndex} setUnmutedIndex={setUnmutedIndex} />
+            <div
+              className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} items-center justify-between w-full space-y-8 md:space-y-0 md:space-x-0 md:${index % 2 === 0 ? "space-x-8" : "space-x-reverse space-x-8"}`}
+            >
+              <div className="w-full md:w-1/2">
+                <TestimonialCard {...item} />
+              </div>
+              <div className="w-full md:w-1/2">
+                <VideoCard item={item} index={index} unmutedIndex={unmutedIndex} setUnmutedIndex={setUnmutedIndex} />
+              </div>
             </div>
           </RevealOnScroll>
         ))
@@ -125,7 +148,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ item, index, unmutedIndex, setUnm
 };
 
 // Testimonial Card Component
-const TestimonialCard: React.FC<TestimonialVideoItem> = ({ name, followers, text, stats, avatar }) => {
+const TestimonialCard: React.FC<TestimonialVideoItem> = ({ name, followers, text, stats, avatar, profileUrl }) => {
   return (
     <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 w-full max-w-xl p-6 rounded-lg shadow-lg text-white hover:bg-gray-800 transition duration-300">
       <div className="flex-shrink-0">
@@ -135,13 +158,9 @@ const TestimonialCard: React.FC<TestimonialVideoItem> = ({ name, followers, text
         <div>
           <h3 className="text-3xl font-bold">{name}</h3>
           <p className="text-2xl text-gray-400">{followers}</p>
+          <a href={profileUrl} target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-400 text-lg">Instagram</a>
         </div>
         <p className="text-xl text-gray-300">"{text}"</p>
-        <div className="flex flex-col space-y-1 md:space-y-0 md:space-x-4 md:flex-row text-xl text-gray-400">
-          {stats.map((stat, index) => (
-            <p key={index}>{stat}</p>
-          ))}
-        </div>
       </div>
     </div>
   );
