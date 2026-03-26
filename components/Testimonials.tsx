@@ -29,7 +29,7 @@ const ClientVideoSection: React.FC = () => {
         text: "We partnered with this video creation agency to scale our creative output, and the results were phenomenal: higher engagement, stronger audience retention, and measurable conversion lift in just weeks.",
         stats: ["Video Creation", "Brand Growth", "High Engagement", "ROI-focused"],
         avatar: "/abij.png",
-        videoUrl: "/AQMcnqzRO1YO6fMbZl1iJGZ2s6f2gsaoOSUATmruDQrnuCHf1ayK9SpcfSSbo-ogQWZDcSsxZQJPTuh-aVzNaI43rp3ipBpoVRWxgx4.mp4",
+        videoUrl: "https://vlzqrxxsielfcuq7.public.blob.vercel-storage.com/AQMcnqzRO1YO6fMbZl1iJGZ2s6f2gsaoOSUATmruDQrnuCHf1ayK9SpcfSSbo-ogQWZDcSsxZQJPTuh-aVzNaI43rp3ipBpoVRWxgx4.mp4",
         profileUrl: "https://www.instagram.com/abhinavmahajanlife/",
       },
       {
@@ -39,7 +39,7 @@ const ClientVideoSection: React.FC = () => {
         text: "Their storytelling approach for fitness campaigns is next-level: authentic, high-energy clips that drove more demo signups and community interaction than any previous content.",
         stats: ["Fitness Content", "Community Growth", "Healthy Lifestyle", "Conversion Focused"],
         avatar: "/nipun.png",
-        videoUrl: "/AQMgl81LzpXtmUixUnp1-3IYe2esYM8znPh_l6fDBagJ0ZHKafqo165SA-YAPIqP1DT-n3u5brIiW7IWDv-sxDIT.mp4",
+        videoUrl: "https://vlzqrxxsielfcuq7.public.blob.vercel-storage.com/AQMgl81LzpXtmUixUnp1-3IYe2esYM8znPh_l6fDBagJ0ZHKafqo165SA-YAPIqP1DT-n3u5brIiW7IWDv-sxDIT.mp4",
         profileUrl: "https://www.instagram.com/nipunfitness/",
       },
       {
@@ -52,16 +52,7 @@ const ClientVideoSection: React.FC = () => {
         videoUrl: "",
         profileUrl: "https://www.instagram.com/ashvin.shibu/",
       },
-      {
-        id: "static-4",
-        name: "Tried But Failed",
-        followers: "50K followers",
-        text: "Their bold storytelling and unique personality made our campaign stand out in a crowded feed.",
-        stats: ["Bold Voice", "Audience Growth", "Storytelling"],
-        avatar: "/image.png",
-        videoUrl: "",
-        profileUrl: "https://www.instagram.com/_triedbutfailed/",
-      }
+
     ];
 
     setItems(staticItems);
